@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  RickAndMorty
+
+  Created by José Dávalos Rosas on 06/08/23.
+  
+*/
+
+// MARK: - HomeView
+"home_view_title" = "Rick & Morty";
+"home_view_name" = "Name";
+"home_view_status" = "Status";
+"home_view_loading" = "Loading Content";
+
+// MARK: - DetailView
+"detail_view_title" = "%@'s Information";
