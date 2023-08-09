@@ -8,8 +8,8 @@
 
 // MARK: - HomeView
 "home_view_title" = "Rick & Morty";
-"home_view_name" = "Nombre";
-"home_view_status" = "Estado";
+"home_view_name %@" = "**Nombre:** %@";
+"home_view_status %@" = "**Estado:** %@";
 "home_view_loading" = "Cargando Contenido";
 // MARK: - DetailView
-"detail_view_title" = "Información de %@";
+"detail_view_title %@" = "Información de %@";

@@ -24,20 +24,11 @@ struct HomeView: View {
                                     .clipShape(Circle())
                                     .frame(width: 80, height: 80)
                                 VStack(alignment: .leading) {
-                                    HStack(alignment: .top) {
-                                        Text("home_view_name")
-                                            .bold()
-                                        Text(item.name)
-                                    }
-                                    HStack {
-                                        Text("home_view_status")
-                                            .bold()
-                                        Text(item.status)
-                                    }
+                                    Text("home_view_name \(item.name)")
+                                    Text("home_view_status \(item.status)")
                                 }
                             }
                         }
-
                     }
                 }
                 .navigationTitle("home_view_title")

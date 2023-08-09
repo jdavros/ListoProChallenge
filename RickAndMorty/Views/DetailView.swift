@@ -9,12 +9,14 @@ import SwiftUI
 
 struct DetailView: View {
 
-    @State var character: CharacterWithImage
+    let character: CharacterWithImage
 
     var body: some View {
         VStack {
             character.image
-                .frame(width: 400, height: 400)
+                .frame(width: 200, height: 200)
+            Text("detail_view_title \(character.name)")
+                .font(.custom(Font.amasticBold, size: 20))
         }
     }
 }
