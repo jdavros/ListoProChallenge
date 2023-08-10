@@ -25,7 +25,6 @@ struct HomeView: View {
                                     .frame(width: 80, height: 80)
                                 VStack(alignment: .leading) {
                                     Text("home_view_name \(item.name)")
-                                    Text("home_view_status \(item.status)")
                                 }
                             }
                         }

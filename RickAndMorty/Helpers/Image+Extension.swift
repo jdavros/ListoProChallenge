@@ -10,5 +10,4 @@ import SwiftUI
 
 extension Image {
     static let characterPlaceholder = Image("CharacterPlaceholder")
-    static let detailPlaceholder = Image("AppIcon")
 }

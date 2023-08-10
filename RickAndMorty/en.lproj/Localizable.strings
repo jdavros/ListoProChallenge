@@ -9,8 +9,14 @@
 // MARK: - HomeView
 "home_view_title" = "Rick & Morty";
 "home_view_name %@" = "**Name:** %@";
-"home_view_status %@" = "**Status:** %@";
 "home_view_loading" = "Loading Content";
 
 // MARK: - DetailView
 "detail_view_title %@" = "%@ Information";
+"detail_view_status %@" = "**Status:** %@";
+"detail_view_species %@" = "**Species:** %@";
+"detail_view_type %@" = "**Type:** %@";
+"detail_view_gender %@" = "**Gender:** %@";
+"detail_view_origin %@" = "**Origin:** %@";
+"detail_view_location %@" = "**Location:** %@";
+"detail_view_episodes" = "EPISODES";

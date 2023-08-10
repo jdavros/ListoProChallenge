@@ -14,6 +14,11 @@ enum LoadingState {
     case loaded
 }
 
+protocol HomeViewModelProtocol {
+    func getCharactersList()
+    func downloadCharactersImages(with characters: [Character])
+}
+
 final class HomeViewModel: ObservableObject {
 
     @Published private(set) var charactersList: [CharacterWithImage] = []
