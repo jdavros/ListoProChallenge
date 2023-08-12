@@ -11,6 +11,7 @@ struct DetailView: View {
 
     let character: CharacterWithImage
     @State private var episodes = [String]()
+    @ObservedObject private var viewModel: DetailViewModel
 
     var body: some View {
         VStack {
@@ -30,37 +31,41 @@ struct DetailView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("detail_view_status \(character.status)")
-                        Text("detail_view_species \(character.status)")
-                        Text("detail_view_type \(character.status)")
+                        Text("detail_view_species \(character.species)")
+                        Text("detail_view_origin \(character.origin.name)")
                     }
                     .frame(maxWidth: .infinity)
                     VStack(alignment: .leading) {
-                        Text("detail_view_gender \(character.status)")
-                        Text("detail_view_origin \(character.status)")
-                        Text("detail_view_location \(character.status)")
+                        Text("detail_view_gender \(character.gender)")
+                        Text("detail_view_type \(character.type)")
+                        Text("detail_view_location \(character.location.name)")
                     }
                     .frame(maxWidth: .infinity)
                 }
+                .font(.system(.footnote, design: .rounded))
             }
-            .frame(maxWidth: .infinity, maxHeight: 140)
+            .frame(maxWidth: .infinity, maxHeight: 80)
             .background(.secondary)
             Text("detail_view_episodes")
-                .font(.custom(Font.amasticBold, size: 30))
+                .font(.custom(Font.amasticBold, size: 25))
             List {
-                ForEach(character.name) { character in
+                ForEach(viewModel.episodesDetails) { episode in
                     HStack {
-                        Text(character)
-                        Text("Lorem ipsum dolor")
+                        Text(episode.id)
+                        Text(episode.name)
                     }
                 }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            viewModel.getEpisodesDetail()
+        }
     }
 
     init(character: CharacterWithImage) {
         self.character = character
-        self.episodes = episodes
+        viewModel = DetailViewModel(episodeURLs: character.episodes)
     }
 }
 
@@ -70,7 +75,15 @@ struct DetailView_Previews: PreviewProvider {
             id: 1,
             name: "Rick",
             status: "Alive",
-            image: Image.characterPlaceholder
+            species: "Human",
+            type: "",
+            gender: "Male",
+            origin: ExtraInfo(name: "Earth (Replacement Dimension)", url: nil),
+            location: ExtraInfo(name: "Earth (Replacement Dimension)", url: nil),
+            image: Image.characterPlaceholder,
+            episodes: [
+                ""
+            ]
         )
         Group {
             DetailView(character: characterWithImage)

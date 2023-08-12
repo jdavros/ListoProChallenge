@@ -14,22 +14,37 @@ protocol DetailViewModelProtocol {
 
 final class DetailViewModel: ObservableObject {
 
+    @Published private(set) var isDetailListAvailable: Bool = true
+    @Published private(set) var episodesDetails: [Episode]
+
+    private var cancellables = Set<AnyCancellable>()
     let episodeURLs: [String]
     let service: CharacterService
-    @Published var episodesDetails: [Episode]
 
     init(
         episodeURLs: [String],
-        episodesDetails: [Episode] = [Episode](),
-        service: CharacterServiceProtocol = CharacterService()
+        episodesDetails: [Episode] = [Episode]()
     ) {
         self.episodeURLs = episodeURLs
         self.episodesDetails = episodesDetails
+        service = CharacterService(client: URLSessionHttpClient())
     }
 }
 
 extension DetailViewModel: DetailViewModelProtocol {
     func getEpisodesDetail() {
-        <#code#>
+        service.getEpisodesList(with: episodeURLs)
+            .sink { [weak self] value in
+                switch value {
+                case .failure:
+                    self?.isDetailListAvailable = false
+                case .finished:
+                    self?.isDetailListAvailable = true
+                }
+            } receiveValue: { [weak self] in
+                self?.episodesDetails = $0
+            }
+            .store(in: &cancellables)
+
     }
 }

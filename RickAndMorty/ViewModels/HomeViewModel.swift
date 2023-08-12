@@ -27,8 +27,10 @@ final class HomeViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let service: CharacterServiceProtocol
 
-    public init(service: CharacterServiceProtocol = CharacterService()) {
-        self.service = service
+    public init(client: URLSessionHttpClient = URLSessionHttpClient()) {
+        self.service = CharacterService(
+            client: client
+        )
     }
 
     public func getCharactersList() {
@@ -58,7 +60,13 @@ private extension Character {
             id: self.id,
             name: self.name,
             status: self.status,
-            image: image
+            species: self.species,
+            type: self.type ?? "",
+            gender: self.gender,
+            origin: self.origin,
+            location: self.location,
+            image: image,
+            episodes: self.episodes
         )
     }
 }

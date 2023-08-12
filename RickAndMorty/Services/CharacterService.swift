@@ -12,32 +12,44 @@ import SwiftUI
 
 protocol CharacterServiceProtocol {
     func getCharactersList() -> AnyPublisher<[Character], Never>
+    func getEpisodesList(with urls: [String]) -> AnyPublisher<[Episode], Error>
     func downloadCharactersImages(with character: Character) -> AnyPublisher<Image, Never>
 }
 
 final class CharacterService: CharacterServiceProtocol {
-    let cancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
+    private let client: URLSessionHttpClient
+
+    init(client: URLSessionHttpClient) {
+        self.client = client
+    }
 
     public func getCharactersList() -> AnyPublisher<[Character], Never> {
-        let emptyCharacterArray = [Character]()
-        let client = URLSessionHttpClient()
-
         guard let url = try? Endpoints.getEndpointURL(with: .character) else {
             Logger.networking.error("Converting path into an URL failed.")
-            return Just(emptyCharacterArray)
+            return Just([Character]())
                 .eraseToAnyPublisher()
         }
 
         return client.get(url: url, model: ApiResponse.self)
             .map { $0.results }
-            .replaceError(with: emptyCharacterArray)
+            .replaceError(with: [Character]())
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
+    }
+
+    public func getEpisodesList(with urls: [String]) -> AnyPublisher<[Episode], Error> {
+        urls.publisher
+            .compactMap { URL(string: $0) }
+            .flatMap {
+                self.client.get(url: $0, model: Episode.self)
+            }
+            .collect()
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }
 
     public func downloadCharactersImages(with character: Character) -> AnyPublisher<Image, Never> {
-        let client = URLSessionHttpClient()
-
         guard let url = URL(string: character.imageURL) else {
             Logger.networking.error("Converting path into an URL failed.")
             return Just(.characterPlaceholder)

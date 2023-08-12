@@ -108,6 +108,14 @@ public final class MockCharacterService: CharacterServiceProtocol {
             .eraseToAnyPublisher()
     }
 
+    func getEpisodesList(with urls: [String]) -> AnyPublisher<[Episode], Error> {
+        return Just([
+            Episode(id: "S01E01", name: "Pilot")
+        ])
+        .setFailureType(to: Error.self)
+        .eraseToAnyPublisher()
+    }
+
     func downloadCharactersImages(with character: Character) -> AnyPublisher<Image, Never> {
         return Just(.characterPlaceholder)
             .eraseToAnyPublisher()
