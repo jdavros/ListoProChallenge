@@ -59,38 +59,7 @@ final class HomeViewControllerTests: XCTestCase {
         // Arrange
         let sut = makeSUT(state: .populated)
         var cancellables = Set<AnyCancellable>()
-        let expectedCharactersList: [Character] = [
-            Character(
-                id: 1,
-                name: "Rick Sanchez",
-                status: "Alive",
-                imageURL: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            ),
-            Character(
-                id: 2,
-                name: "Morty Smith",
-                status: "Alive",
-                imageURL: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
-            ),
-            Character(
-                id: 3,
-                name: "Summer Smith",
-                status: "Alive",
-                imageURL: "https://rickandmortyapi.com/api/character/avatar32.jpeg"
-            ),
-            Character(
-                id: 4,
-                name: "Abradolf Lincler",
-                status: "Unknown",
-                imageURL: "https://rickandmortyapi.com/api/character/avatar/7.jpeg"
-            ),
-            Character(
-                id: 5,
-                name: "Agency Director",
-                status: "Dead",
-                imageURL: "https://rickandmortyapi.com/api/character/avatar/9.jpeg"
-            )
-        ]
+        let expectedCharactersList = mockCharacterList()
         // Assert
         let exp = expectation(description: "Wait for characters to load")
         sut.$charactersList.sink { characters in
@@ -108,6 +77,63 @@ final class HomeViewControllerTests: XCTestCase {
     private func makeSUT(state: CharacterServiceState) -> HomeViewModel {
         let mockedCharacterService = MockedCharacterService(with: state)
         return HomeViewModel(service: mockedCharacterService)
+    }
+
+    private func mockCharacterList() -> [Character] {
+        return [
+            Character(
+                id: 1,
+                name: "Rick Sanchez",
+                status: "Alive",
+                species: "Human",
+                type: nil,
+                gender: "Male",
+                origin: ExtraInfo(name: "Earth (C-137)", url: "https://rickandmortyapi.com/api/location/1"),
+                location: ExtraInfo(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
+                imageURL: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+                episodes: getMockedEpisodesList()
+            ),
+            Character(
+                id: 2,
+                name: "Morty Smith",
+                status: "Alive",
+                species: "Human",
+                type: nil,
+                gender: "Male",
+                origin: ExtraInfo(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
+                location: ExtraInfo(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
+                imageURL: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+                episodes: getMockedEpisodesList()
+            ),
+            Character(
+                id: 3,
+                name: "Summer Smith",
+                status: "Alive",
+                species: "Human",
+                type: nil,
+                gender: "Female",
+                origin: ExtraInfo(
+                    name: "Earth (Replacement Dimension)",
+                    url: "https://rickandmortyapi.com/api/location/20"
+                ),
+                location: ExtraInfo(
+                    name: "Earth (Replacement Dimension)",
+                    url: "https://rickandmortyapi.com/api/location/20"
+                ),
+                imageURL: "https://rickandmortyapi.com/api/character/avatar32.jpeg",
+                episodes: getMockedEpisodesList()
+            )
+        ]
+    }
+
+    private func getMockedEpisodesList() -> [String] {
+        return [
+            "https://rickandmortyapi.com/api/episode/1",
+            "https://rickandmortyapi.com/api/episode/2",
+            "https://rickandmortyapi.com/api/episode/3",
+            "https://rickandmortyapi.com/api/episode/4",
+            "https://rickandmortyapi.com/api/episode/5"
+        ]
     }
 
 }
