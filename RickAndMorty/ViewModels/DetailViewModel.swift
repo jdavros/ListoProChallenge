@@ -44,6 +44,5 @@ extension DetailViewModel: DetailViewModelProtocol {
                 self?.episodesDetails = $0
             }
             .store(in: &cancellables)
-
     }
 }

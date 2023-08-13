@@ -38,16 +38,19 @@ final class MockedCharacterService: CharacterServiceProtocol {
         return Just(Image("circle.person")).eraseToAnyPublisher()
     }
 
-    func getEpisodesList(with urls: [String]) -> AnyPublisher<[RickAndMorty.Episode], Error> {
-        return Just([
-            Episode(id: "S01E01", name: "Pilot"),
-            Episode(id: "S01E02", name: "Lawnmower Dog"),
-            Episode(id: "S01E03", name: "Anatomy Park"),
-            Episode(id: "S01E04", name: "M. Night Shaym-Aliens!"),
-            Episode(id: "S01E05", name: "Meeseeks and Destroy")
-        ])
-        .setFailureType(to: Error.self)
-        .eraseToAnyPublisher()
+    func getEpisodesList(with urls: [String]) -> AnyPublisher<[Episode], Error> {
+        switch characterServiceState {
+        case .empty:
+            return Just([])
+                .setFailureType(to: Error.self)
+                .receive(on: RunLoop.main)
+                .eraseToAnyPublisher()
+        case .error:
+            return Fail(error: ServiceErrors.conversionError)
+                .eraseToAnyPublisher()
+        case .populated:
+            return getMockedEpisodesList()
+        }
     }
 }
 
@@ -64,7 +67,7 @@ private extension MockedCharacterService {
                 origin: ExtraInfo(name: "Earth (C-137)", url: "https://rickandmortyapi.com/api/location/1"),
                 location: ExtraInfo(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
                 imageURL: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                episodes: getMockedEpisodesList()
+                episodes: .getMockedEpisodesURLList()
             ),
             Character(
                 id: 2,
@@ -76,7 +79,7 @@ private extension MockedCharacterService {
                 origin: ExtraInfo(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
                 location: ExtraInfo(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
                 imageURL: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-                episodes: getMockedEpisodesList()
+                episodes: .getMockedEpisodesURLList()
             ),
             Character(
                 id: 3,
@@ -94,7 +97,7 @@ private extension MockedCharacterService {
                     url: "https://rickandmortyapi.com/api/location/20"
                 ),
                 imageURL: "https://rickandmortyapi.com/api/character/avatar32.jpeg",
-                episodes: getMockedEpisodesList()
+                episodes: .getMockedEpisodesURLList()
             )
         ]
 
@@ -102,13 +105,22 @@ private extension MockedCharacterService {
             .eraseToAnyPublisher()
     }
 
-    func getMockedEpisodesList() -> [String] {
-        return [
-            "https://rickandmortyapi.com/api/episode/1",
-            "https://rickandmortyapi.com/api/episode/2",
-            "https://rickandmortyapi.com/api/episode/3",
-            "https://rickandmortyapi.com/api/episode/4",
-            "https://rickandmortyapi.com/api/episode/5"
-        ]
+    func getMockedEpisodesList() -> AnyPublisher<[Episode], Error> {
+        return Just([
+            Episode(id: "S01E01", name: "Pilot"),
+            Episode(id: "S01E02", name: "Lawnmower Dog"),
+            Episode(id: "S01E03", name: "Anatomy Park"),
+            Episode(id: "S01E04", name: "M. Night Shaym-Aliens!"),
+            Episode(id: "S01E05", name: "Meeseeks and Destroy")
+        ])
+        .setFailureType(to: Error.self)
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
+    }
+}
+
+private extension MockedCharacterService {
+    enum ServiceErrors: Error {
+        case conversionError
     }
 }

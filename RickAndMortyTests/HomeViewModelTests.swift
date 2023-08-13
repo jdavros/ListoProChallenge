@@ -91,7 +91,7 @@ final class HomeViewControllerTests: XCTestCase {
                 origin: ExtraInfo(name: "Earth (C-137)", url: "https://rickandmortyapi.com/api/location/1"),
                 location: ExtraInfo(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
                 imageURL: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                episodes: getMockedEpisodesList()
+                episodes: .getMockedEpisodesURLList()
             ),
             Character(
                 id: 2,
@@ -103,7 +103,7 @@ final class HomeViewControllerTests: XCTestCase {
                 origin: ExtraInfo(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
                 location: ExtraInfo(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
                 imageURL: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-                episodes: getMockedEpisodesList()
+                episodes: .getMockedEpisodesURLList()
             ),
             Character(
                 id: 3,
@@ -121,18 +121,8 @@ final class HomeViewControllerTests: XCTestCase {
                     url: "https://rickandmortyapi.com/api/location/20"
                 ),
                 imageURL: "https://rickandmortyapi.com/api/character/avatar32.jpeg",
-                episodes: getMockedEpisodesList()
+                episodes: .getMockedEpisodesURLList()
             )
-        ]
-    }
-
-    private func getMockedEpisodesList() -> [String] {
-        return [
-            "https://rickandmortyapi.com/api/episode/1",
-            "https://rickandmortyapi.com/api/episode/2",
-            "https://rickandmortyapi.com/api/episode/3",
-            "https://rickandmortyapi.com/api/episode/4",
-            "https://rickandmortyapi.com/api/episode/5"
         ]
     }
 

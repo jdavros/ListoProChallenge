@@ -62,9 +62,3 @@ final class CharacterService: CharacterServiceProtocol {
             .eraseToAnyPublisher()
     }
 }
-
-private extension CharacterService {
-    enum ServiceErrors: Error {
-        case conversionError
-    }
-}
