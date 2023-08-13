@@ -23,11 +23,13 @@ final class HomeViewModel: ObservableObject {
 
     @Published private(set) var charactersList: [CharacterWithImage] = []
     @Published private(set) var loadingState: LoadingState = .idle
+    @Published private(set) var startAnimation: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
     private let service: CharacterServiceProtocol
 
     public init(client: URLSessionHttpClient = URLSessionHttpClient()) {
+        self.startAnimation = true
         self.service = CharacterService(
             client: client
         )
@@ -46,6 +48,7 @@ final class HomeViewModel: ObservableObject {
             service.downloadCharactersImages(with: character)
                 .sink { [weak self] image in
                     self?.loadingState = .loaded
+                    self?.startAnimation = false
                     self?.charactersList.append(character.mapToCharacterWithImage(image))
                 }
                 .store(in: &cancellables)

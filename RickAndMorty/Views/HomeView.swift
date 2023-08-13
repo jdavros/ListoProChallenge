@@ -12,7 +12,7 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
-            if viewModel.loadingState != .idle {
+            if viewModel.loadingState == .loaded {
                 List {
                     ForEach(viewModel.charactersList) { item in
                         NavigationLink {
@@ -38,11 +38,11 @@ struct HomeView: View {
                     Image.characterPlaceholder
                         .clipShape(Circle())
                         .frame(width: 400, height: 400)
-                        .rotationEffect(Angle(degrees: viewModel.loadingState != .idle ? 360: 0))
+                        .rotationEffect(Angle(degrees: viewModel.startAnimation ? -360: 0))
                 }
             }
         }
-        .animation(.linear(duration: 2.0).repeatForever(autoreverses: true), value: viewModel.loadingState)
+        .animation(.linear(duration: 2.0).repeatForever(autoreverses: false), value: viewModel.startAnimation)
         .onAppear {
             viewModel.getCharactersList()
         }
