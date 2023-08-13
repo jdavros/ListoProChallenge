@@ -18,9 +18,9 @@ protocol CharacterServiceProtocol {
 
 final class CharacterService: CharacterServiceProtocol {
     private var cancellables = Set<AnyCancellable>()
-    private let client: URLSessionHttpClient
+    private let client: NetworkProtocol
 
-    init(client: URLSessionHttpClient) {
+    init(client: NetworkProtocol) {
         self.client = client
     }
 

@@ -15,19 +15,18 @@ protocol DetailViewModelProtocol {
 final class DetailViewModel: ObservableObject {
 
     @Published private(set) var isDetailListAvailable: Bool = true
-    @Published private(set) var episodesDetails: [Episode]
+    @Published private(set) var episodesDetails: [Episode] = []
 
     private var cancellables = Set<AnyCancellable>()
-    let episodeURLs: [String]
-    let service: CharacterService
+    private let episodeURLs: [String]
+    private let service: CharacterServiceProtocol
 
-    init(
+    public init(
         episodeURLs: [String],
-        episodesDetails: [Episode] = [Episode]()
+        service: CharacterServiceProtocol = CharacterService(client: URLSessionHttpClient())
     ) {
         self.episodeURLs = episodeURLs
-        self.episodesDetails = episodesDetails
-        service = CharacterService(client: URLSessionHttpClient())
+        self.service = service
     }
 }
 

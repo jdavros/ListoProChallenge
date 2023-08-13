@@ -1,5 +1,5 @@
 //
-//  MockHomeViewModel.swift
+//  MockCharacterService.swift
 //  RickAndMorty
 //
 //  Created by José Dávalos Rosas on 30/07/23.
@@ -110,7 +110,11 @@ public final class MockCharacterService: CharacterServiceProtocol {
 
     func getEpisodesList(with urls: [String]) -> AnyPublisher<[Episode], Error> {
         return Just([
-            Episode(id: "S01E01", name: "Pilot")
+            Episode(id: "S01E01", name: "Pilot"),
+            Episode(id: "S01E02", name: "Lawnmower Dog"),
+            Episode(id: "S01E03", name: "Anatomy Park"),
+            Episode(id: "S01E04", name: "M. Night Shaym-Aliens!"),
+            Episode(id: "S01E05", name: "Meeseeks and Destroy")
         ])
         .setFailureType(to: Error.self)
         .eraseToAnyPublisher()

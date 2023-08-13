@@ -12,6 +12,7 @@ import SwiftUI
 
 protocol NetworkProtocol {
     func get<T: Decodable>(url: URL, model: T.Type) -> AnyPublisher<T, Error>
+    func downloadImage(url: URL) -> AnyPublisher<Image, Error>
 }
 
 public class URLSessionHttpClient: NetworkProtocol {

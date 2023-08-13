@@ -63,9 +63,12 @@ struct DetailView: View {
         }
     }
 
-    init(character: CharacterWithImage) {
+    init(
+        character: CharacterWithImage,
+        viewModel: DetailViewModel? = nil
+    ) {
         self.character = character
-        viewModel = DetailViewModel(episodeURLs: character.episodes)
+        self.viewModel = viewModel ?? DetailViewModel(episodeURLs: character.episodes)
     }
 }
 
@@ -82,14 +85,30 @@ struct DetailView_Previews: PreviewProvider {
             location: ExtraInfo(name: "Earth (Replacement Dimension)", url: nil),
             image: Image.characterPlaceholder,
             episodes: [
-                ""
+                "https://rickandmortyapi.com/api/episode/1",
+                "https://rickandmortyapi.com/api/episode/2",
+                "https://rickandmortyapi.com/api/episode/3",
+                "https://rickandmortyapi.com/api/episode/4",
+                "https://rickandmortyapi.com/api/episode/5"
             ]
         )
         Group {
-            DetailView(character: characterWithImage)
-                .environment(\.locale, Locale(identifier: "en"))
-            DetailView(character: characterWithImage)
-                .environment(\.locale, Locale(identifier: "es"))
+            DetailView(
+                character: characterWithImage,
+                viewModel: DetailViewModel(
+                    episodeURLs: characterWithImage.episodes,
+                    service: MockCharacterService()
+                )
+            )
+            .environment(\.locale, Locale(identifier: "en"))
+            DetailView(
+                character: characterWithImage,
+                viewModel: DetailViewModel(
+                    episodeURLs: characterWithImage.episodes,
+                    service: MockCharacterService()
+                )
+            )
+            .environment(\.locale, Locale(identifier: "es"))
         }
     }
 }

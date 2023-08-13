@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6397D8D2A889BF600303F2B /* HomeLoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6397D8C2A889BF600303F2B /* HomeLoadingScreenView.swift */; };
+		E6397D8F2A88A4FB00303F2B /* HomeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6397D8E2A88A4FB00303F2B /* HomeListView.swift */; };
 		E6813E022A7D4FEA00827346 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6813E012A7D4FEA00827346 /* HomeViewModelTests.swift */; };
 		E6813E052A7D50A400827346 /* MockedCharacterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6813E042A7D50A400827346 /* MockedCharacterService.swift */; };
 		E6A62B822A85466800B7D694 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A62B812A85466800B7D694 /* Episode.swift */; };
@@ -23,7 +25,7 @@
 		E6B3636F2A7629A800143B4B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B3636E2A7629A800143B4B /* Logger.swift */; };
 		E6B363712A77454000143B4B /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B363702A77454000143B4B /* ApiResponse.swift */; };
 		E6B363732A7745A500143B4B /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B363722A7745A500143B4B /* Info.swift */; };
-		E6B363762A7756BB00143B4B /* MockHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B363752A7756BB00143B4B /* MockHomeViewModel.swift */; };
+		E6B363762A7756BB00143B4B /* MockCharacterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B363752A7756BB00143B4B /* MockCharacterService.swift */; };
 		E6B673EC2A84351700EBBBC8 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6B673EA2A84351700EBBBC8 /* AmaticSC-Regular.ttf */; };
 		E6B673ED2A84351700EBBBC8 /* AmaticSC-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6B673EB2A84351700EBBBC8 /* AmaticSC-Bold.ttf */; };
 		E6B673F02A8435CE00EBBBC8 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B673EF2A8435CE00EBBBC8 /* Font+Extension.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6397D8C2A889BF600303F2B /* HomeLoadingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLoadingScreenView.swift; sourceTree = "<group>"; };
+		E6397D8E2A88A4FB00303F2B /* HomeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListView.swift; sourceTree = "<group>"; };
 		E6813E012A7D4FEA00827346 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		E6813E042A7D50A400827346 /* MockedCharacterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedCharacterService.swift; sourceTree = "<group>"; };
 		E6A62B812A85466800B7D694 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
@@ -62,7 +66,7 @@
 		E6B3636E2A7629A800143B4B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		E6B363702A77454000143B4B /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		E6B363722A7745A500143B4B /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
-		E6B363752A7756BB00143B4B /* MockHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeViewModel.swift; sourceTree = "<group>"; };
+		E6B363752A7756BB00143B4B /* MockCharacterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCharacterService.swift; sourceTree = "<group>"; };
 		E6B673EA2A84351700EBBBC8 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
 		E6B673EB2A84351700EBBBC8 /* AmaticSC-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Bold.ttf"; sourceTree = "<group>"; };
 		E6B673EE2A84357A00EBBBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +97,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E6397D8B2A889BE400303F2B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E6B363362A76124200143B4B /* HomeView.swift */,
+				E6397D8C2A889BF600303F2B /* HomeLoadingScreenView.swift */,
+				E6397D8E2A88A4FB00303F2B /* HomeListView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		E6813E032A7D508E00827346 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,7 +186,7 @@
 		E6B3635F2A76126500143B4B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E6B363362A76124200143B4B /* HomeView.swift */,
+				E6397D8B2A889BE400303F2B /* Home */,
 				E6ED302D2A80BE6400F31291 /* DetailView.swift */,
 			);
 			path = Views;
@@ -208,7 +222,7 @@
 		E6B363742A77569F00143B4B /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				E6B363752A7756BB00143B4B /* MockHomeViewModel.swift */,
+				E6B363752A7756BB00143B4B /* MockCharacterService.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -391,8 +405,10 @@
 				E6D5B6682A7A207800FCE31B /* Image+Extension.swift in Sources */,
 				E6B363712A77454000143B4B /* ApiResponse.swift in Sources */,
 				E6B363642A76165600143B4B /* HomeViewModel.swift in Sources */,
-				E6B363762A7756BB00143B4B /* MockHomeViewModel.swift in Sources */,
+				E6B363762A7756BB00143B4B /* MockCharacterService.swift in Sources */,
 				E6B3636F2A7629A800143B4B /* Logger.swift in Sources */,
+				E6397D8F2A88A4FB00303F2B /* HomeListView.swift in Sources */,
+				E6397D8D2A889BF600303F2B /* HomeLoadingScreenView.swift in Sources */,
 				E6D5B6652A7A13E500FCE31B /* CharacterWithImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

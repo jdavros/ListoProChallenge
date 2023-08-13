@@ -28,13 +28,15 @@ final class HomeViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let service: CharacterServiceProtocol
 
-    public init(client: URLSessionHttpClient = URLSessionHttpClient()) {
+    public init(
+        service: CharacterServiceProtocol = CharacterService(client: URLSessionHttpClient())
+    ) {
         self.startAnimation = true
-        self.service = CharacterService(
-            client: client
-        )
+        self.service = service
     }
+}
 
+extension HomeViewModel: HomeViewModelProtocol {
     public func getCharactersList() {
         service.getCharactersList()
             .sink { [weak self] characters in
