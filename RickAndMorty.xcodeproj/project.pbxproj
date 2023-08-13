@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E6397D8D2A889BF600303F2B /* HomeLoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6397D8C2A889BF600303F2B /* HomeLoadingScreenView.swift */; };
 		E6397D8F2A88A4FB00303F2B /* HomeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6397D8E2A88A4FB00303F2B /* HomeListView.swift */; };
+		E6397D942A88B74000303F2B /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6397D932A88B74000303F2B /* DetailHeaderView.swift */; };
+		E6397D962A88B74D00303F2B /* DetailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6397D952A88B74D00303F2B /* DetailInformationView.swift */; };
 		E6813E022A7D4FEA00827346 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6813E012A7D4FEA00827346 /* HomeViewModelTests.swift */; };
 		E6813E052A7D50A400827346 /* MockedCharacterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6813E042A7D50A400827346 /* MockedCharacterService.swift */; };
 		E6A62B822A85466800B7D694 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A62B812A85466800B7D694 /* Episode.swift */; };
@@ -48,6 +50,8 @@
 /* Begin PBXFileReference section */
 		E6397D8C2A889BF600303F2B /* HomeLoadingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLoadingScreenView.swift; sourceTree = "<group>"; };
 		E6397D8E2A88A4FB00303F2B /* HomeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListView.swift; sourceTree = "<group>"; };
+		E6397D932A88B74000303F2B /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
+		E6397D952A88B74D00303F2B /* DetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInformationView.swift; sourceTree = "<group>"; };
 		E6813E012A7D4FEA00827346 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		E6813E042A7D50A400827346 /* MockedCharacterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedCharacterService.swift; sourceTree = "<group>"; };
 		E6A62B812A85466800B7D694 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
@@ -105,6 +109,16 @@
 				E6397D8E2A88A4FB00303F2B /* HomeListView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		E6397D922A88B71600303F2B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E6ED302D2A80BE6400F31291 /* DetailView.swift */,
+				E6397D932A88B74000303F2B /* DetailHeaderView.swift */,
+				E6397D952A88B74D00303F2B /* DetailInformationView.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		E6813E032A7D508E00827346 /* Mocks */ = {
@@ -186,8 +200,8 @@
 		E6B3635F2A76126500143B4B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E6397D922A88B71600303F2B /* Detail */,
 				E6397D8B2A889BE400303F2B /* Home */,
-				E6ED302D2A80BE6400F31291 /* DetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -395,6 +409,7 @@
 				E6B363672A7618EC00143B4B /* CharacterService.swift in Sources */,
 				E6B363622A7615D700143B4B /* Character.swift in Sources */,
 				E6B363372A76124200143B4B /* HomeView.swift in Sources */,
+				E6397D942A88B74000303F2B /* DetailHeaderView.swift in Sources */,
 				E6ED302E2A80BE6400F31291 /* DetailView.swift in Sources */,
 				E6B363732A7745A500143B4B /* Info.swift in Sources */,
 				E6A62B822A85466800B7D694 /* Episode.swift in Sources */,
@@ -409,6 +424,7 @@
 				E6B3636F2A7629A800143B4B /* Logger.swift in Sources */,
 				E6397D8F2A88A4FB00303F2B /* HomeListView.swift in Sources */,
 				E6397D8D2A889BF600303F2B /* HomeLoadingScreenView.swift in Sources */,
+				E6397D962A88B74D00303F2B /* DetailInformationView.swift in Sources */,
 				E6D5B6652A7A13E500FCE31B /* CharacterWithImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

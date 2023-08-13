@@ -15,37 +15,8 @@ struct DetailView: View {
 
     var body: some View {
         VStack {
-            VStack {
-                character.image
-                    .resizable()
-                    .frame(width: 200, height: 200)
-                    .clipShape(Circle())
-                    .aspectRatio(contentMode: .fit)
-                Text("detail_view_title \(character.name)")
-                    .font(.custom(Font.amasticBold, size: 30))
-            }
-            .frame(maxWidth: .infinity, maxHeight: 250)
-            .background(Color(UIColor.systemBackground))
-
-            VStack(alignment: .leading) {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("detail_view_status \(character.status)")
-                        Text("detail_view_species \(character.species)")
-                        Text("detail_view_origin \(character.origin.name)")
-                    }
-                    .frame(maxWidth: .infinity)
-                    VStack(alignment: .leading) {
-                        Text("detail_view_gender \(character.gender)")
-                        Text("detail_view_type \(character.type)")
-                        Text("detail_view_location \(character.location.name)")
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                .font(.system(.footnote, design: .rounded))
-            }
-            .frame(maxWidth: .infinity, maxHeight: 80)
-            .background(.secondary)
+            DetailHeaderView(character: character)
+            DetailInformationView(character: character)
             Text("detail_view_episodes")
                 .font(.custom(Font.amasticBold, size: 25))
             List {
