@@ -13,4 +13,5 @@ extension Logger {
     static let networking = Logger(subsystem: subsystem, category: "Networking")
     static let jsonDecoding = Logger(subsystem: subsystem, category: "JSON decoding")
     static let imageConversion = Logger(subsystem: subsystem, category: "Image conversion")
+    static let database = Logger(subsystem: subsystem, category: "Database")
 }
