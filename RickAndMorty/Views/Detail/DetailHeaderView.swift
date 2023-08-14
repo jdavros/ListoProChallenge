@@ -12,7 +12,7 @@ struct DetailHeaderView: View {
 
     var body: some View {
         VStack {
-            character.image
+            character.image?
                 .resizable()
                 .frame(width: 200, height: 200)
                 .clipShape(Circle())
@@ -37,14 +37,20 @@ struct DetailHeaderView_Previews: PreviewProvider {
             origin: ExtraInfo(name: "Earth (Replacement Dimension)", url: nil),
             location: ExtraInfo(name: "Earth (Replacement Dimension)", url: nil),
             image: Image.characterPlaceholder,
-            episodes: [
+            episodesURLs: [
                 "https://rickandmortyapi.com/api/episode/1",
                 "https://rickandmortyapi.com/api/episode/2",
                 "https://rickandmortyapi.com/api/episode/3",
                 "https://rickandmortyapi.com/api/episode/4",
                 "https://rickandmortyapi.com/api/episode/5"
-            ]
+            ],
+            episodes: []
         )
-        DetailHeaderView(character: characterWithImage)
+        Group {
+            DetailHeaderView(character: characterWithImage)
+                .environment(\.locale, Locale(identifier: "en"))
+            DetailHeaderView(character: characterWithImage)
+                .environment(\.locale, Locale(identifier: "es"))
+        }
     }
 }

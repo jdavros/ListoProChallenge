@@ -7,6 +7,11 @@
 
 import Foundation
 import SwiftUI
+import OSLog
+
+enum ModelCreation: Error {
+    case conversionError
+}
 
 struct CharacterWithImage: Identifiable {
     let id: Int
@@ -17,6 +22,52 @@ struct CharacterWithImage: Identifiable {
     let gender: String
     let origin: ExtraInfo
     let location: ExtraInfo
-    let image: Image
-    let episodes: [String]
+    let image: Image?
+    let episodesURLs: [String]
+    var episodes: [Episode]
+
+    init(id: Int, name: String, status: String, species: String, type: String, gender: String, origin: ExtraInfo, location: ExtraInfo, image: Image?, episodesURLs: [String], episodes: [Episode]) {
+        self.id = id
+        self.name = name
+        self.status = status
+        self.species = species
+        self.type = type
+        self.gender = gender
+        self.origin = origin
+        self.location = location
+        self.image = image ?? Image.characterPlaceholder
+        self.episodesURLs = episodesURLs
+        self.episodes = episodes
+    }
+
+    init(entity: CharacterEntity) throws {
+
+        guard let id = entity.value(forKey: "id") as? Int,
+              let name = entity.value(forKey: "name") as? String,
+              let status = entity.value(forKey: "status") as? String,
+              let species = entity.value(forKey: "species") as? String,
+              let type = entity.value(forKey: "type") as? String,
+              let gender = entity.value(forKey: "gender") as? String,
+              let origin = try ExtraInfo(entity: entity.origin),
+              let location = try ExtraInfo(entity: entity.location),
+              let episodes = entity.episodes?.allObjects
+        else {
+            Logger.database.error("CoreData: Entity to Model conversion failed.\n\(ModelCreation.conversionError)")
+            throw ModelCreation.conversionError
+        }
+
+        print(episodes)
+
+        self.id = id
+        self.name = name
+        self.status = status
+        self.species = species
+        self.type = type
+        self.gender = gender
+        self.origin = origin
+        self.location = location
+        self.image = Image.characterPlaceholder
+        self.episodesURLs = []
+        self.episodes = []
+    }
 }

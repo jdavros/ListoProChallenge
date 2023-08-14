@@ -25,8 +25,3 @@ struct Character: Codable {
         case episodes = "episode"
     }
 }
-
-struct ExtraInfo: Codable {
-    let name: String
-    let url: String?
-}

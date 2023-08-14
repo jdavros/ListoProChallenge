@@ -45,14 +45,20 @@ struct DetailInformationView_Previews: PreviewProvider {
             origin: ExtraInfo(name: "Earth (Replacement Dimension)", url: nil),
             location: ExtraInfo(name: "Earth (Replacement Dimension)", url: nil),
             image: Image.characterPlaceholder,
-            episodes: [
+            episodesURLs: [
                 "https://rickandmortyapi.com/api/episode/1",
                 "https://rickandmortyapi.com/api/episode/2",
                 "https://rickandmortyapi.com/api/episode/3",
                 "https://rickandmortyapi.com/api/episode/4",
                 "https://rickandmortyapi.com/api/episode/5"
-            ]
+            ],
+            episodes: []
         )
-        DetailInformationView(character: characterWithImage)
+        Group {
+            DetailInformationView(character: characterWithImage)
+                .environment(\.locale, Locale(identifier: "en"))
+            DetailInformationView(character: characterWithImage)
+                .environment(\.locale, Locale(identifier: "es"))
+        }
     }
 }

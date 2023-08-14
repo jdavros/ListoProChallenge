@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeListView: View {
 
-    @ObservedObject var viewModel: HomeViewModel
+    @StateObject var viewModel: HomeViewModel
 
     var body: some View {
         List {
@@ -18,7 +18,7 @@ struct HomeListView: View {
                     DetailView(character: item)
                 } label: {
                     HStack {
-                        item.image
+                        item.image?
                             .resizable()
                             .clipShape(Circle())
                             .frame(width: 80, height: 80)
@@ -30,5 +30,13 @@ struct HomeListView: View {
             }
         }
         .navigationTitle("home_view_title")
+    }
+}
+
+struct HomeListView_Previews: PreviewProvider {
+    static var previews: some View {
+        let mockedCharacterService = MockCharacterService()
+        let viewModel = HomeViewModel(service: mockedCharacterService)
+        HomeListView(viewModel: viewModel)
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 
 protocol DetailViewModelProtocol {
     func getEpisodesDetail()
+    func saveEpisodes(for character: CharacterWithImage?)
 }
 
 final class DetailViewModel: ObservableObject {
@@ -44,5 +45,9 @@ extension DetailViewModel: DetailViewModelProtocol {
                 self?.episodesDetails = $0
             }
             .store(in: &cancellables)
+    }
+
+    func saveEpisodes(for character: CharacterWithImage?) {
+        guard let character = character else { return }
     }
 }

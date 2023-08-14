@@ -71,7 +71,8 @@ private extension Character {
             origin: self.origin,
             location: self.location,
             image: image,
-            episodes: self.episodes
+            episodesURLs: self.episodes,
+            episodes: []
         )
     }
 }
