@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import Combine
 
 protocol DatabaseClientProtocol {
     var savedCharactersPublisher: Published<[CharacterEntity]>.Publisher { get }
 
-    func fetchAllRecords()
-    func saveCharacterRecords(_ character: Character)
+    func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never>
+    func saveCharacterRecords(_ character: CharacterWithImage)
 }
 
 enum DatabaseType {
@@ -34,11 +35,11 @@ final class DatabaseClient: DatabaseClientProtocol {
         }
     }
 
-    func fetchAllRecords() {
-        client.fetchAllRecords()
+    func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never> {
+        client.fetchSavedCharactersList()
     }
 
-    func saveCharacterRecords(_ character: Character) {
+    func saveCharacterRecords(_ character: CharacterWithImage) {
         client.saveCharacterRecords(character)
     }
 }

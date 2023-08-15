@@ -17,7 +17,7 @@ enum CharacterServiceState {
     case populated
 }
 
-final class MockedCharacterService: CharacterServiceProtocol {
+final class MockedCharacterService: NetworkServiceProtocol {
 
     let characterServiceState: CharacterServiceState
 

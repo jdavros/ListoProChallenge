@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import Combine
 
 final class RealmClient: DatabaseClientProtocol {
     @Published var savedCharacters: [CharacterEntity] = []
@@ -16,11 +17,13 @@ final class RealmClient: DatabaseClientProtocol {
 
     }
 
-    func fetchAllRecords() {
+    func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never> {
         #warning("Needs implementation")
+        return Just([])
+            .eraseToAnyPublisher()
     }
 
-    func saveCharacterRecords(_ character: Character) {
+    func saveCharacterRecords(_ character: CharacterWithImage) {
         #warning("Needs implementation")
     }
 }

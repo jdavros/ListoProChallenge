@@ -26,10 +26,10 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var startAnimation: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
-    private let service: CharacterServiceProtocol
+    private let service: NetworkServiceProtocol
 
     public init(
-        service: CharacterServiceProtocol = CharacterService(client: URLSessionHttpClient())
+        service: NetworkServiceProtocol = NetworkService(client: URLSessionHttpClient())
     ) {
         self.startAnimation = true
         self.service = service

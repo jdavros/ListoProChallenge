@@ -39,7 +39,7 @@ struct DetailView: View {
         viewModel: DetailViewModel? = nil
     ) {
         self.character = character
-        self.viewModel = viewModel ?? DetailViewModel(episodeURLs: character.episodesURLs)
+        self.viewModel = viewModel ?? DetailViewModel(character: character)
     }
 }
 
@@ -68,16 +68,18 @@ struct DetailView_Previews: PreviewProvider {
             DetailView(
                 character: characterWithImage,
                 viewModel: DetailViewModel(
-                    episodeURLs: characterWithImage.episodesURLs,
-                    service: MockCharacterService()
+                    character: characterWithImage,
+                    networkService: MockCharacterService(),
+                    databaseService: MockDatabaseService()
                 )
             )
             .environment(\.locale, Locale(identifier: "en"))
             DetailView(
                 character: characterWithImage,
                 viewModel: DetailViewModel(
-                    episodeURLs: characterWithImage.episodesURLs,
-                    service: MockCharacterService()
+                    character: characterWithImage,
+                    networkService: MockCharacterService(),
+                    databaseService: MockDatabaseService()
                 )
             )
             .environment(\.locale, Locale(identifier: "es"))

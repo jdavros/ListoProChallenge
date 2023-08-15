@@ -19,21 +19,24 @@ final class DetailViewModel: ObservableObject {
     @Published private(set) var episodesDetails: [Episode] = []
 
     private var cancellables = Set<AnyCancellable>()
-    private let episodeURLs: [String]
-    private let service: CharacterServiceProtocol
+    private var character: CharacterWithImage
+    private let networkService: NetworkServiceProtocol
+    private let databaseService: DatabaseServiceProtocol
 
     public init(
-        episodeURLs: [String],
-        service: CharacterServiceProtocol = CharacterService(client: URLSessionHttpClient())
+        character: CharacterWithImage,
+        networkService: NetworkServiceProtocol? =  nil,
+        databaseService: DatabaseServiceProtocol? = nil
     ) {
-        self.episodeURLs = episodeURLs
-        self.service = service
+        self.character = character
+        self.networkService = networkService ?? NetworkService(client: URLSessionHttpClient())
+        self.databaseService = databaseService ?? DatabaseService(client: DatabaseClient(with: .coredata))
     }
 }
 
 extension DetailViewModel: DetailViewModelProtocol {
     func getEpisodesDetail() {
-        service.getEpisodesList(with: episodeURLs)
+        networkService.getEpisodesList(with: character.episodesURLs)
             .sink { [weak self] value in
                 switch value {
                 case .failure:
@@ -42,12 +45,15 @@ extension DetailViewModel: DetailViewModelProtocol {
                     self?.isDetailListAvailable = true
                 }
             } receiveValue: { [weak self] in
+                self?.character.episodes = $0
                 self?.episodesDetails = $0
+                self?.saveEpisodes(for: self?.character)
             }
             .store(in: &cancellables)
     }
 
     func saveEpisodes(for character: CharacterWithImage?) {
         guard let character = character else { return }
+        databaseService.saveCharacterRecords(character)
     }
 }

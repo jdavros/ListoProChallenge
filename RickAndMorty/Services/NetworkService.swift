@@ -1,5 +1,5 @@
 //
-//  CharacterService.swift
+//  NetworkService.swift
 //  RickAndMorty
 //
 //  Created by José Dávalos Rosas on 29/07/23.
@@ -10,13 +10,13 @@ import Foundation
 import OSLog
 import SwiftUI
 
-protocol CharacterServiceProtocol {
+protocol NetworkServiceProtocol {
     func getCharactersList() -> AnyPublisher<[Character], Never>
     func getEpisodesList(with urls: [String]) -> AnyPublisher<[Episode], Error>
     func downloadCharactersImages(with character: Character) -> AnyPublisher<Image, Never>
 }
 
-final class CharacterService: CharacterServiceProtocol {
+final class NetworkService: NetworkServiceProtocol {
     private var cancellables = Set<AnyCancellable>()
     private let client: NetworkProtocol
 
