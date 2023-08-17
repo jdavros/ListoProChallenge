@@ -10,6 +10,10 @@ import Combine
 import CoreData
 import OSLog
 
+enum CoreDataError: Error {
+    case conversion(String)
+}
+
 public final class CoreDataClient: DatabaseClientProtocol {
     @Published var savedCharacters: [CharacterEntity] = []
     var savedCharactersPublisher: Published<[CharacterEntity]>.Publisher { $savedCharacters }
@@ -69,6 +73,9 @@ public final class CoreDataClient: DatabaseClientProtocol {
             episodeEntity.id = episode.id
             episodeEntity.name = episode.name
             episodeEntity.url = character.episodesURLs[index]
+            episodeEntity.characters = NSSet(
+                array: fetchSavedCharacterEntities(episode.characters)
+            )
             episodes.append(episodeEntity)
         }
         saveData()
@@ -77,12 +84,44 @@ public final class CoreDataClient: DatabaseClientProtocol {
     private func saveData() {
         do {
             try container.viewContext.save()
-            Logger.database.info("CoreData: The data was saved successfully")
         } catch let error {
             Logger.database.error("CoreData: Error Saving\n\(error)")
         }
     }
 
+    private func fetchSavedCharacterEntities(_ urls: [String]) -> [CharacterEntity] {
+        var characters = [CharacterEntity]()
+        do {
+            let ids = try getIds(from: urls)
+            for id in ids {
+                let request = NSFetchRequest<CharacterEntity>(entityName: .characterEntityName)
+                request.predicate = NSPredicate(format: "id == %d", id)
+                guard let savedCharacter = try container.viewContext.fetch(request).first else {
+                    throw CoreDataError.conversion("Character: \(id)")
+                }
+                characters.append(savedCharacter)
+            }
+        } catch let error {
+            Logger.database.error("CoreData: Error fetching character. \(error)")
+        }
+        return characters
+    }
+
+    private func getIds(from urls: [String]) throws -> [Int] {
+        var ids = [Int]()
+        for url in urls {
+            let range = NSRange(location: 0, length: url.utf16.count)
+            let regex = try NSRegularExpression(pattern: "\\d+")
+            guard let match = regex.firstMatch(in: url, range: range),
+                  let range = Range(match.range, in: url),
+                  let matchingId = Int(url[range]) else {
+                Logger.database.error("There was an error trying to get the character ID from the given URL.")
+                throw CoreDataError.conversion(url)
+            }
+            ids.append(matchingId)
+        }
+        return ids
+    }
 }
 
 private extension String {

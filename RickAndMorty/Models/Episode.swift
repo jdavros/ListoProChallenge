@@ -10,9 +10,10 @@ import Foundation
 struct Episode: Codable, Identifiable {
     let id: String
     let name: String
+    let characters: [String]
 
     enum CodingKeys: String, CodingKey {
         case id = "episode"
-        case name
+        case name, characters
     }
 }

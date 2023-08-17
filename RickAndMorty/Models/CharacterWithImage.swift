@@ -26,7 +26,19 @@ struct CharacterWithImage: Identifiable {
     let episodesURLs: [String]
     var episodes: [Episode]
 
-    init(id: Int, name: String, status: String, species: String, type: String, gender: String, origin: ExtraInfo, location: ExtraInfo, image: Image?, episodesURLs: [String], episodes: [Episode]) {
+    init(
+        id: Int,
+        name: String,
+        status: String,
+        species: String,
+        type: String,
+        gender: String,
+        origin: ExtraInfo,
+        location: ExtraInfo,
+        image: Image?,
+        episodesURLs: [String],
+        episodes: [Episode]
+    ) {
         self.id = id
         self.name = name
         self.status = status
@@ -50,14 +62,11 @@ struct CharacterWithImage: Identifiable {
               let gender = entity.value(forKey: "gender") as? String,
               let origin = try ExtraInfo(entity: entity.origin),
               let location = try ExtraInfo(entity: entity.location),
-              let episodes = entity.episodes?.allObjects
+              let episodes = entity.episodes?.allObjects as? [Episode]
         else {
             Logger.database.error("CoreData: Entity to Model conversion failed.\n\(ModelCreation.conversionError)")
             throw ModelCreation.conversionError
         }
-
-        print(episodes)
-
         self.id = id
         self.name = name
         self.status = status
@@ -68,6 +77,6 @@ struct CharacterWithImage: Identifiable {
         self.location = location
         self.image = Image.characterPlaceholder
         self.episodesURLs = []
-        self.episodes = []
+        self.episodes = episodes
     }
 }

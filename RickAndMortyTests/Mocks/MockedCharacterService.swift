@@ -38,7 +38,7 @@ final class MockedCharacterService: NetworkServiceProtocol {
         return Just(Image("circle.person")).eraseToAnyPublisher()
     }
 
-    func getEpisodesList(with urls: [String]) -> AnyPublisher<[Episode], Error> {
+    func getModelList(with urls: [String]) -> AnyPublisher<[Episode], Error> {
         switch characterServiceState {
         case .empty:
             return Just([])

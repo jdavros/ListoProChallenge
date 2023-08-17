@@ -26,19 +26,22 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var startAnimation: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
-    private let service: NetworkServiceProtocol
+    private let networkService: NetworkServiceProtocol
+    private let databaseService: DatabaseServiceProtocol
 
     public init(
-        service: NetworkServiceProtocol = NetworkService(client: URLSessionHttpClient())
+        networkService: NetworkServiceProtocol = NetworkService(client: URLSessionHttpClient()),
+        databaseService: DatabaseServiceProtocol = DatabaseService(client: DatabaseClient(with: .coredata))
     ) {
         self.startAnimation = true
-        self.service = service
+        self.networkService = networkService
+        self.databaseService = databaseService
     }
 }
 
 extension HomeViewModel: HomeViewModelProtocol {
     public func getCharactersList() {
-        service.getCharactersList()
+        networkService.getCharactersList()
             .sink { [weak self] characters in
                 self?.downloadCharactersImages(with: characters)
             }
@@ -47,11 +50,13 @@ extension HomeViewModel: HomeViewModelProtocol {
 
     public func downloadCharactersImages(with characters: [Character]) {
         for character in characters {
-            service.downloadCharactersImages(with: character)
+            networkService.downloadCharactersImages(with: character)
                 .sink { [weak self] image in
+                    let retrievedCharacter = character.mapToCharacterWithImage(image)
+                    self?.databaseService.saveCharacterRecords(retrievedCharacter)
+                    self?.charactersList.append(retrievedCharacter)
                     self?.loadingState = .loaded
                     self?.startAnimation = false
-                    self?.charactersList.append(character.mapToCharacterWithImage(image))
                 }
                 .store(in: &cancellables)
 

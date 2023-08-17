@@ -186,16 +186,27 @@ extension Collection where Element == String {
             "https://rickandmortyapi.com/api/episode/5"
         ]
     }
+
+    static func getMockedCharactersURLList() -> [String] {
+        return [
+            "https://rickandmortyapi.com/api/character/1",
+            "https://rickandmortyapi.com/api/character/2",
+            "https://rickandmortyapi.com/api/character/3",
+            "https://rickandmortyapi.com/api/character/4",
+            "https://rickandmortyapi.com/api/character/5"
+        ]
+    }
 }
 
 extension Collection where Element == Episode {
     static func getMockedEpisodesList() -> [Episode] {
+        let characters: [String] = .getMockedCharactersURLList()
         return [
-            Episode(id: "S01E01", name: "Pilot"),
-            Episode(id: "S01E02", name: "Lawnmower Dog"),
-            Episode(id: "S01E03", name: "Anatomy Park"),
-            Episode(id: "S01E04", name: "M. Night Shaym-Aliens!"),
-            Episode(id: "S01E05", name: "Meeseeks and Destroy")
+            Episode(id: "S01E01", name: "Pilot", characters: characters),
+            Episode(id: "S01E02", name: "Lawnmower Dog", characters: characters),
+            Episode(id: "S01E03", name: "Anatomy Park", characters: characters),
+            Episode(id: "S01E04", name: "M. Night Shaym-Aliens!", characters: characters),
+            Episode(id: "S01E05", name: "Meeseeks and Destroy", characters: characters)
         ]
     }
 }

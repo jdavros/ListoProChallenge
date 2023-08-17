@@ -35,8 +35,10 @@ struct HomeListView: View {
 
 struct HomeListView_Previews: PreviewProvider {
     static var previews: some View {
-        let mockedCharacterService = MockCharacterService()
-        let viewModel = HomeViewModel(service: mockedCharacterService)
+        let viewModel = HomeViewModel(
+            networkService: MockCharacterService(),
+            databaseService: MockDatabaseService()
+        )
         HomeListView(viewModel: viewModel)
     }
 }

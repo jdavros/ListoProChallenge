@@ -41,6 +41,14 @@
 		E6BF9E512A8965DB009A0E00 /* DatabaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF9E502A8965DB009A0E00 /* DatabaseClient.swift */; };
 		E6BF9E532A8A4EC2009A0E00 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF9E522A8A4EC2009A0E00 /* CoreDataClient.swift */; };
 		E6BF9E552A8A5B23009A0E00 /* RealmClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF9E542A8A5B23009A0E00 /* RealmClient.swift */; };
+		E6D5AF642A8D376700E2A83F /* LocationEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF5C2A8D376700E2A83F /* LocationEntity+CoreDataClass.swift */; };
+		E6D5AF652A8D376700E2A83F /* LocationEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF5D2A8D376700E2A83F /* LocationEntity+CoreDataProperties.swift */; };
+		E6D5AF662A8D376700E2A83F /* CharacterEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF5E2A8D376700E2A83F /* CharacterEntity+CoreDataClass.swift */; };
+		E6D5AF672A8D376700E2A83F /* CharacterEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF5F2A8D376700E2A83F /* CharacterEntity+CoreDataProperties.swift */; };
+		E6D5AF682A8D376700E2A83F /* OriginEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF602A8D376700E2A83F /* OriginEntity+CoreDataClass.swift */; };
+		E6D5AF692A8D376700E2A83F /* OriginEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF612A8D376700E2A83F /* OriginEntity+CoreDataProperties.swift */; };
+		E6D5AF6A2A8D376700E2A83F /* EpisodeEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF622A8D376700E2A83F /* EpisodeEntity+CoreDataClass.swift */; };
+		E6D5AF6B2A8D376700E2A83F /* EpisodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF632A8D376700E2A83F /* EpisodeEntity+CoreDataProperties.swift */; };
 		E6D5B6652A7A13E500FCE31B /* CharacterWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5B6642A7A13E500FCE31B /* CharacterWithImage.swift */; };
 		E6D5B6682A7A207800FCE31B /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5B6672A7A207800FCE31B /* Image+Extension.swift */; };
 		E6ED30262A80B52500F31291 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6ED30282A80B52500F31291 /* Localizable.strings */; };
@@ -96,6 +104,14 @@
 		E6BF9E542A8A5B23009A0E00 /* RealmClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmClient.swift; sourceTree = "<group>"; };
 		E6BF9E572A8A6550009A0E00 /* RickAndMortyContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RickAndMortyContainer.xcdatamodel; sourceTree = "<group>"; };
 		E6CC652A2A80A6D6003CCA8D /* RickAndMorty.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RickAndMorty.xctestplan; sourceTree = "<group>"; };
+		E6D5AF5C2A8D376700E2A83F /* LocationEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E6D5AF5D2A8D376700E2A83F /* LocationEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E6D5AF5E2A8D376700E2A83F /* CharacterEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E6D5AF5F2A8D376700E2A83F /* CharacterEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E6D5AF602A8D376700E2A83F /* OriginEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OriginEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E6D5AF612A8D376700E2A83F /* OriginEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OriginEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E6D5AF622A8D376700E2A83F /* EpisodeEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E6D5AF632A8D376700E2A83F /* EpisodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E6D5B6642A7A13E500FCE31B /* CharacterWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterWithImage.swift; sourceTree = "<group>"; };
 		E6D5B6672A7A207800FCE31B /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 		E6ED30272A80B52500F31291 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -160,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				E6B363332A76124200143B4B /* RickAndMorty */,
-				E6BF9E562A8A6550009A0E00 /* RickAndMortyContainer.xcdatamodeld */,
 				E6B363442A76124300143B4B /* RickAndMortyTests */,
 				E6B363322A76124200143B4B /* Products */,
 			);
@@ -180,6 +195,7 @@
 			children = (
 				E6B673EE2A84357A00EBBBC8 /* Info.plist */,
 				E6B363692A76197E00143B4B /* Clients */,
+				E6D5AF3B2A8D280600E2A83F /* Database */,
 				E645DD3E2A8B511400E9D634 /* Database */,
 				E6B673E92A8434F900EBBBC8 /* Fonts */,
 				E6D5B6662A7A205C00FCE31B /* Helpers */,
@@ -285,6 +301,22 @@
 				E6B673EA2A84351700EBBBC8 /* AmaticSC-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		E6D5AF3B2A8D280600E2A83F /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				E6D5AF5C2A8D376700E2A83F /* LocationEntity+CoreDataClass.swift */,
+				E6D5AF5D2A8D376700E2A83F /* LocationEntity+CoreDataProperties.swift */,
+				E6D5AF5E2A8D376700E2A83F /* CharacterEntity+CoreDataClass.swift */,
+				E6D5AF5F2A8D376700E2A83F /* CharacterEntity+CoreDataProperties.swift */,
+				E6D5AF602A8D376700E2A83F /* OriginEntity+CoreDataClass.swift */,
+				E6D5AF612A8D376700E2A83F /* OriginEntity+CoreDataProperties.swift */,
+				E6D5AF622A8D376700E2A83F /* EpisodeEntity+CoreDataClass.swift */,
+				E6D5AF632A8D376700E2A83F /* EpisodeEntity+CoreDataProperties.swift */,
+				E6BF9E562A8A6550009A0E00 /* RickAndMortyContainer.xcdatamodeld */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		E6D5B6662A7A205C00FCE31B /* Helpers */ = {
@@ -447,9 +479,12 @@
 				E6A62B842A8546F100B7D694 /* DetailViewModel.swift in Sources */,
 				E6BF9E512A8965DB009A0E00 /* DatabaseClient.swift in Sources */,
 				E6B363672A7618EC00143B4B /* NetworkService.swift in Sources */,
+				E6D5AF662A8D376700E2A83F /* CharacterEntity+CoreDataClass.swift in Sources */,
 				E6B363622A7615D700143B4B /* Character.swift in Sources */,
+				E6D5AF672A8D376700E2A83F /* CharacterEntity+CoreDataProperties.swift in Sources */,
 				E6B363372A76124200143B4B /* HomeView.swift in Sources */,
 				E6397D942A88B74000303F2B /* DetailHeaderView.swift in Sources */,
+				E6D5AF682A8D376700E2A83F /* OriginEntity+CoreDataClass.swift in Sources */,
 				E6ED302E2A80BE6400F31291 /* DetailView.swift in Sources */,
 				E645DD3D2A8B03D300E9D634 /* MockedInformation.swift in Sources */,
 				E6B363732A7745A500143B4B /* Info.swift in Sources */,
@@ -462,14 +497,19 @@
 				E6B363352A76124200143B4B /* RickAndMortyApp.swift in Sources */,
 				E6D5B6682A7A207800FCE31B /* Image+Extension.swift in Sources */,
 				E6BF9E532A8A4EC2009A0E00 /* CoreDataClient.swift in Sources */,
+				E6D5AF652A8D376700E2A83F /* LocationEntity+CoreDataProperties.swift in Sources */,
 				E6B363712A77454000143B4B /* ApiResponse.swift in Sources */,
 				E6B363642A76165600143B4B /* HomeViewModel.swift in Sources */,
 				E6B363762A7756BB00143B4B /* MockCharacterService.swift in Sources */,
+				E6D5AF642A8D376700E2A83F /* LocationEntity+CoreDataClass.swift in Sources */,
 				E645DD372A8AB00D00E9D634 /* ExtraInfo.swift in Sources */,
+				E6D5AF6B2A8D376700E2A83F /* EpisodeEntity+CoreDataProperties.swift in Sources */,
 				E6B3636F2A7629A800143B4B /* Logger.swift in Sources */,
+				E6D5AF6A2A8D376700E2A83F /* EpisodeEntity+CoreDataClass.swift in Sources */,
 				E6397D8F2A88A4FB00303F2B /* HomeListView.swift in Sources */,
 				E6BF9E552A8A5B23009A0E00 /* RealmClient.swift in Sources */,
 				E6397D8D2A889BF600303F2B /* HomeLoadingScreenView.swift in Sources */,
+				E6D5AF692A8D376700E2A83F /* OriginEntity+CoreDataProperties.swift in Sources */,
 				E645DD512A8B535F00E9D634 /* CoreData+Extension.swift in Sources */,
 				E6397D962A88B74D00303F2B /* DetailInformationView.swift in Sources */,
 				E6D5B6652A7A13E500FCE31B /* CharacterWithImage.swift in Sources */,

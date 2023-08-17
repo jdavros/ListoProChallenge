@@ -27,7 +27,10 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = HomeViewModel(service: MockCharacterService())
+        let viewModel = HomeViewModel(
+            networkService: MockCharacterService(),
+            databaseService: MockDatabaseService()
+        )
         Group {
             HomeView(viewModel: viewModel)
                 .environment(\.locale, Locale(identifier: "en"))
