@@ -111,12 +111,33 @@ private extension MockedCharacterService {
     }
 
     func getMockedEpisodesList() -> AnyPublisher<[Episode], Error> {
-        return Just([
-            Episode(id: "S01E01", name: "Pilot", characters: populateWithMockedCharacters()),
-            Episode(id: "S01E02", name: "Lawnmower Dog", characters: populateWithMockedCharacters()),
-            Episode(id: "S01E03", name: "Anatomy Park", characters: populateWithMockedCharacters()),
-            Episode(id: "S01E04", name: "M. Night Shaym-Aliens!", characters: populateWithMockedCharacters()),
-            Episode(id: "S01E05", name: "Meeseeks and Destroy", characters: populateWithMockedCharacters())
+        return Just( [
+            Episode(
+                id: "S01E01",
+                name: "Pilot",
+                url: "https://rickandmortyapi.com/api/episode/1",
+                characters: populateWithMockedCharacters()
+            ),
+            Episode(
+                id: "S01E02",
+                name: "Lawnmower Dog",
+                url: "https://rickandmortyapi.com/api/episode/2",
+                characters: populateWithMockedCharacters()),
+            Episode(
+                id: "S01E03",
+                name: "Anatomy Park",
+                url: "https://rickandmortyapi.com/api/episode/3",
+                characters: populateWithMockedCharacters()),
+            Episode(
+                id: "S01E04",
+                name: "M. Night Shaym-Aliens!",
+                url: "https://rickandmortyapi.com/api/episode/4",
+                characters: populateWithMockedCharacters()),
+            Episode(
+                id: "S01E05",
+                name: "Meeseeks and Destroy",
+                url: "https://rickandmortyapi.com/api/episode/5",
+                characters: populateWithMockedCharacters())
         ])
         .setFailureType(to: Error.self)
         .receive(on: RunLoop.main)

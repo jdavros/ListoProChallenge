@@ -79,14 +79,18 @@ final class HomeViewControllerTests: XCTestCase {
         }
 
     // MARK: - Helper Functions
-    private func makeSUT(state: ServiceState) -> HomeViewModel {
+    private func makeSUT(
+        state: ServiceState,
+        connectionType: ConnectionType = .wifi
+    ) -> HomeViewModel {
         let mockedCharacterService = MockedCharacterService(with: state)
 
         return HomeViewModel(
             networkService: mockedCharacterService,
             databaseService: DatabaseService(
                 client: CoreDataClient(enableTestMode: true)
-            )
+            ),
+            networkMonitorService: MockedNetworkMonitorService(with: connectionType)
         )
     }
 

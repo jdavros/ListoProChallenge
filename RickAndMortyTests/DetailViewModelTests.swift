@@ -78,13 +78,15 @@ final class DetailViewModelTests: XCTestCase {
     // MARK: - Helper Functions
     private func makeSUT(
         episodesURLs: [String] = [],
-        state: ServiceState
+        state: ServiceState,
+        connectionType: ConnectionType = .wifi
     ) -> DetailViewModel {
         let mockedCharacter = MockedInformation.charactersWithImage.first!
         return DetailViewModel(
             character: mockedCharacter,
             networkService: MockedCharacterService(with: state),
-            databaseService: DatabaseService(client: CoreDataClient(enableTestMode: true))
+            databaseService: DatabaseService(client: CoreDataClient(enableTestMode: true)),
+            networkMontitorService: MockedNetworkMonitorService(with: connectionType)
         )
     }
 }
