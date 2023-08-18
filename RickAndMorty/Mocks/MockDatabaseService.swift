@@ -10,8 +10,15 @@ import CoreData
 import Foundation
 
 public final class MockDatabaseService: DatabaseServiceProtocol {
+
     func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never> {
         return Just(MockedInformation.charactersWithImage)
+            .eraseToAnyPublisher()
+    }
+
+    func fetchSavedCharacterEpisodes(_ character: CharacterWithImage) -> AnyPublisher<[Episode], Never> {
+        let episodes: [Episode] = .getMockedEpisodesList()
+        return Just(episodes)
             .eraseToAnyPublisher()
     }
 

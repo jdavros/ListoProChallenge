@@ -17,13 +17,19 @@ final class RealmClient: DatabaseClientProtocol {
 
     }
 
-    func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never> {
+    public func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never> {
         #warning("Needs implementation")
         return Just([])
             .eraseToAnyPublisher()
     }
 
-    func saveCharacterRecords(_ character: CharacterWithImage) {
+    public func fetchSavedCharacterEpisodes(_ character: CharacterWithImage) -> AnyPublisher<[Episode], Never> {
+        #warning("Needs implementation")
+        return Just([])
+            .eraseToAnyPublisher()
+    }
+
+    public func saveCharacterRecords(_ character: CharacterWithImage) {
         #warning("Needs implementation")
     }
 }

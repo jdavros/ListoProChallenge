@@ -12,6 +12,7 @@ import SwiftUI
 
 protocol DatabaseServiceProtocol {
     func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never>
+    func fetchSavedCharacterEpisodes(_ character: CharacterWithImage) -> AnyPublisher<[Episode], Never>
     func saveCharacterRecords(_ character: CharacterWithImage)
 }
 
@@ -24,6 +25,10 @@ final class DatabaseService: DatabaseServiceProtocol {
 
     func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never> {
         client.fetchSavedCharactersList()
+    }
+
+    func fetchSavedCharacterEpisodes(_ character: CharacterWithImage) -> AnyPublisher<[Episode], Never> {
+        client.fetchSavedCharacterEpisodes(character)
     }
 
     func saveCharacterRecords(_ character: CharacterWithImage) {

@@ -62,7 +62,7 @@ struct CharacterWithImage: Identifiable {
               let gender = entity.value(forKey: "gender") as? String,
               let origin = try ExtraInfo(entity: entity.origin),
               let location = try ExtraInfo(entity: entity.location),
-              let episodes = entity.episodes?.allObjects as? [Episode]
+              let episodeURLs = try entity.episodes
         else {
             Logger.database.error("CoreData: Entity to Model conversion failed.\n\(ModelCreation.conversionError)")
             throw ModelCreation.conversionError
@@ -77,6 +77,6 @@ struct CharacterWithImage: Identifiable {
         self.location = location
         self.image = Image.characterPlaceholder
         self.episodesURLs = []
-        self.episodes = episodes
+        self.episodes = []
     }
 }

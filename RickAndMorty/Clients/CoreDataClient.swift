@@ -52,6 +52,26 @@ public final class CoreDataClient: DatabaseClientProtocol {
             .eraseToAnyPublisher()
     }
 
+    func fetchSavedCharacterEpisodes(_ character: CharacterWithImage) -> AnyPublisher<[Episode], Never> {
+        var episodes = [Episode]()
+
+        let request = NSFetchRequest<EpisodeEntity>(entityName: .episodeEntityName)
+        request.predicate = NSPredicate(format: "url in %@", character.episodesURLs)
+
+        do {
+            let savedEpisodes = try container.viewContext.fetch(request)
+            for savedEpisode in savedEpisodes {
+                let episode = try Episode(entity: savedEpisode)
+                episodes.append(episode)
+            }
+        } catch let error {
+            Logger.database.error("CoreData: Error fetching episodes. \(error)")
+        }
+
+        return Just(episodes)
+            .eraseToAnyPublisher()
+    }
+
     func saveCharacterRecords(_ character: CharacterWithImage) {
         let managedObjectContext = container.viewContext
         let newCharacter = CharacterEntity(context: managedObjectContext)
@@ -133,4 +153,5 @@ public final class CoreDataClient: DatabaseClientProtocol {
 private extension String {
     static let containerName = "RickAndMortyContainer"
     static let characterEntityName = "CharacterEntity"
+    static let episodeEntityName = "EpisodeEntity"
 }

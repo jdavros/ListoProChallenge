@@ -12,6 +12,7 @@ protocol DatabaseClientProtocol {
     var savedCharactersPublisher: Published<[CharacterEntity]>.Publisher { get }
 
     func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never>
+    func fetchSavedCharacterEpisodes(_ character: CharacterWithImage) -> AnyPublisher<[Episode], Never>
     func saveCharacterRecords(_ character: CharacterWithImage)
 }
 
@@ -37,6 +38,10 @@ final class DatabaseClient: DatabaseClientProtocol {
 
     func fetchSavedCharactersList() -> AnyPublisher<[CharacterWithImage], Never> {
         client.fetchSavedCharactersList()
+    }
+
+    func fetchSavedCharacterEpisodes(_ character: CharacterWithImage) -> AnyPublisher<[Episode], Never> {
+        client.fetchSavedCharacterEpisodes(character)
     }
 
     func saveCharacterRecords(_ character: CharacterWithImage) {

@@ -22,34 +22,47 @@ final class DetailViewModel: ObservableObject {
     private var character: CharacterWithImage
     private let networkService: NetworkServiceProtocol
     private let databaseService: DatabaseServiceProtocol
+    private let networkMonitorService: NetworkMonitorServiceProtocol
 
     public init(
         character: CharacterWithImage,
-        networkService: NetworkServiceProtocol? =  nil,
-        databaseService: DatabaseServiceProtocol? = nil
+        networkService: NetworkServiceProtocol =  NetworkService(client: URLSessionHttpClient()),
+        databaseService: DatabaseServiceProtocol = DatabaseService(client: DatabaseClient(with: .coredata)),
+        networkMontitorService: NetworkMonitorServiceProtocol = NetworkMonitorService()
     ) {
         self.character = character
-        self.networkService = networkService ?? NetworkService(client: URLSessionHttpClient())
-        self.databaseService = databaseService ?? DatabaseService(client: DatabaseClient(with: .coredata))
+        self.networkService = networkService
+        self.databaseService = databaseService
+        self.networkMonitorService = networkMontitorService
+        self.networkMonitorService.startMonitoring()
     }
 }
 
 extension DetailViewModel: DetailViewModelProtocol {
     func getEpisodesDetail() {
-        networkService.getEpisodesList(with: character.episodesURLs)
-            .sink { [weak self] value in
-                switch value {
-                case .failure:
-                    self?.isDetailListAvailable = false
-                case .finished:
-                    self?.isDetailListAvailable = true
+        if networkMonitorService.isAppConnected {
+            networkService.getEpisodesList(with: character.episodesURLs)
+                .sink { [weak self] value in
+                    switch value {
+                    case .failure:
+                        self?.isDetailListAvailable = false
+                    case .finished:
+                        self?.isDetailListAvailable = true
+                    }
+                } receiveValue: { [weak self] in
+                    self?.character.episodes = $0
+                    self?.episodesDetails = $0
+                    self?.saveEpisodes(for: self?.character)
                 }
-            } receiveValue: { [weak self] in
-                self?.character.episodes = $0
-                self?.episodesDetails = $0
-                self?.saveEpisodes(for: self?.character)
-            }
-            .store(in: &cancellables)
+                .store(in: &cancellables)
+        } else {
+            databaseService.fetchSavedCharacterEpisodes(character)
+                .sink { episodes in
+                    self.character.episodes = episodes
+                    self.episodesDetails = episodes
+                }
+                .store(in: &cancellables)
+        }
     }
 
     func saveEpisodes(for character: CharacterWithImage?) {
