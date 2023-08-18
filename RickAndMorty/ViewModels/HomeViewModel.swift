@@ -27,19 +27,31 @@ final class HomeViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let networkService: NetworkServiceProtocol
     private let databaseService: DatabaseServiceProtocol
+    private let networkMonitorService: NetworkMonitorServiceProtocol
 
     public init(
         networkService: NetworkServiceProtocol = NetworkService(client: URLSessionHttpClient()),
-        databaseService: DatabaseServiceProtocol = DatabaseService(client: DatabaseClient(with: .coredata))
+        databaseService: DatabaseServiceProtocol = DatabaseService(client: DatabaseClient(with: .coredata)),
+        networkMonitorService: NetworkMonitorServiceProtocol = NetworkMonitorService()
     ) {
         self.startAnimation = true
         self.networkService = networkService
         self.databaseService = databaseService
+        self.networkMonitorService = networkMonitorService
+        self.networkMonitorService.startMonitoring()
     }
 }
 
 extension HomeViewModel: HomeViewModelProtocol {
     public func getCharactersList() {
+        if networkMonitorService.isAppConnected {
+            getCharactersFromNetworkService()
+        } else {
+            getCharactersFromDatabaseService()
+        }
+    }
+
+    private func getCharactersFromNetworkService() {
         networkService.getCharactersList()
             .flatMap(downloadCharactersImages(with:))
             .flatMap(\.publisher)
@@ -50,7 +62,16 @@ extension HomeViewModel: HomeViewModelProtocol {
                 self?.startAnimation = false
             }
             .store(in: &cancellables)
+    }
 
+    private func getCharactersFromDatabaseService() {
+        databaseService.fetchSavedCharactersList()
+            .sink { [weak self] retrievedCharacters in
+                self?.charactersList = retrievedCharacters
+                self?.loadingState = .loaded
+                self?.startAnimation = false
+            }
+            .store(in: &cancellables)
     }
 
     private func downloadCharactersImages(with characters: [Character]) -> AnyPublisher<[CharacterWithImage], Never> {

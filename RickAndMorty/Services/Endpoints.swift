@@ -11,13 +11,16 @@ enum PathsError: Error {
     case urlConversion
 }
 
-enum Paths: String {
+enum Paths {
     case character
+    case characterWithId(Int)
 
     var name: String {
         switch self {
         case .character:
             return "/character"
+        case let .characterWithId(id):
+            return "/character/\(id)"
         }
     }
 }
@@ -30,5 +33,9 @@ struct Endpoints {
             throw PathsError.urlConversion
         }
         return url
+    }
+
+    public static func getEndpointStringValue(with path: Paths) -> String {
+        "\(base)\(path.name)"
     }
 }

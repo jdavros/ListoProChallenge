@@ -49,6 +49,7 @@
 		E6D5AF692A8D376700E2A83F /* OriginEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF612A8D376700E2A83F /* OriginEntity+CoreDataProperties.swift */; };
 		E6D5AF6A2A8D376700E2A83F /* EpisodeEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF622A8D376700E2A83F /* EpisodeEntity+CoreDataClass.swift */; };
 		E6D5AF6B2A8D376700E2A83F /* EpisodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF632A8D376700E2A83F /* EpisodeEntity+CoreDataProperties.swift */; };
+		E6D5AF6F2A8FCB6800E2A83F /* NetworkMonitorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5AF6E2A8FCB6800E2A83F /* NetworkMonitorService.swift */; };
 		E6D5B6652A7A13E500FCE31B /* CharacterWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5B6642A7A13E500FCE31B /* CharacterWithImage.swift */; };
 		E6D5B6682A7A207800FCE31B /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5B6672A7A207800FCE31B /* Image+Extension.swift */; };
 		E6ED30262A80B52500F31291 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6ED30282A80B52500F31291 /* Localizable.strings */; };
@@ -112,6 +113,7 @@
 		E6D5AF612A8D376700E2A83F /* OriginEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OriginEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E6D5AF622A8D376700E2A83F /* EpisodeEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E6D5AF632A8D376700E2A83F /* EpisodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E6D5AF6E2A8FCB6800E2A83F /* NetworkMonitorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitorService.swift; sourceTree = "<group>"; };
 		E6D5B6642A7A13E500FCE31B /* CharacterWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterWithImage.swift; sourceTree = "<group>"; };
 		E6D5B6672A7A207800FCE31B /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 		E6ED30272A80B52500F31291 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				E6B363662A7618EC00143B4B /* NetworkService.swift */,
 				E6B3636C2A7624C700143B4B /* Endpoints.swift */,
 				E645DD382A8ABC6E00E9D634 /* DatabaseService.swift */,
+				E6D5AF6E2A8FCB6800E2A83F /* NetworkMonitorService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				E6D5AF652A8D376700E2A83F /* LocationEntity+CoreDataProperties.swift in Sources */,
 				E6B363712A77454000143B4B /* ApiResponse.swift in Sources */,
 				E6B363642A76165600143B4B /* HomeViewModel.swift in Sources */,
+				E6D5AF6F2A8FCB6800E2A83F /* NetworkMonitorService.swift in Sources */,
 				E6B363762A7756BB00143B4B /* MockCharacterService.swift in Sources */,
 				E6D5AF642A8D376700E2A83F /* LocationEntity+CoreDataClass.swift in Sources */,
 				E645DD372A8AB00D00E9D634 /* ExtraInfo.swift in Sources */,
