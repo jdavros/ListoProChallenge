@@ -22,8 +22,8 @@ public final class MockCharacterService: NetworkServiceProtocol {
         .eraseToAnyPublisher()
     }
 
-    func downloadCharactersImages(with character: Character) -> AnyPublisher<Image, Never> {
-        return Just(.characterPlaceholder)
+    func downloadCharactersImages(with character: Character) -> AnyPublisher<CharacterWithImage, Never> {
+        Just(character.mapToCharacterWithImage(.characterPlaceholder))
             .eraseToAnyPublisher()
     }
 }

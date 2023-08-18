@@ -20,8 +20,14 @@ public final class CoreDataClient: DatabaseClientProtocol {
 
     let container: NSPersistentContainer
 
-    public init() {
+    public init(enableTestMode: Bool = false) {
         container = NSPersistentContainer(name: .containerName)
+        if enableTestMode {
+            let description = NSPersistentStoreDescription(
+                url: URL(filePath: "/dev/null")
+            )
+            container.persistentStoreDescriptions = [description]
+        }
         container.loadPersistentStores { _, error in
             if let error = error {
                 Logger.database.error("CoreData: Error loading database:\n\(error)")

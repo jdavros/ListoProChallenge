@@ -56,27 +56,38 @@ final class HomeViewControllerTests: XCTestCase {
     }
 
     func testHomeViewModel_returnsArrayWithCharacters_whenServiceRetievesCharacters() {
-        // Arrange
-        let sut = makeSUT(state: .populated)
-        var cancellables = Set<AnyCancellable>()
-        let expectedCharactersList = mockCharacterList()
-        // Assert
-        let exp = expectation(description: "Wait for characters to load")
-        sut.$charactersList.sink { characters in
-            for (index, character) in characters.enumerated() {
-                XCTAssertEqual(character.id, expectedCharactersList[index].id)
-                XCTAssertEqual(character.name, expectedCharactersList[index].name)
-                XCTAssertEqual(character.status, expectedCharactersList[index].status)
+            // Arrange
+            let sut = makeSUT(state: .populated)
+            var cancellables = Set<AnyCancellable>()
+            let expectedCharactersList = mockCharacterList()
+            let exp = expectation(description: "Wait for character to load")
+        sut.$charactersList.sink(
+            receiveValue: { _ in
+                for (index, list) in expectedCharactersList.enumerated() {
+                    XCTAssertEqual(list.id, expectedCharactersList[index].id)
+                    XCTAssertEqual(list.name, expectedCharactersList[index].name)
+                    XCTAssertEqual(list.status, expectedCharactersList[index].status)
+                    XCTAssertEqual(list.species, expectedCharactersList[index].species)
+                }
+                exp.fulfill()
             }
-            exp.fulfill()
-        }
-        .store(in: &cancellables)
-        wait(for: [exp], timeout: 1.0)
-    }
+        )
+            .store(in: &cancellables)
 
-    private func makeSUT(state: CharacterServiceState) -> HomeViewModel {
+            sut.getCharactersList()
+            wait(for: [exp], timeout: 1.0)
+        }
+
+    // MARK: - Helper Functions
+    private func makeSUT(state: ServiceState) -> HomeViewModel {
         let mockedCharacterService = MockedCharacterService(with: state)
-        return HomeViewModel(service: mockedCharacterService)
+
+        return HomeViewModel(
+            networkService: mockedCharacterService,
+            databaseService: DatabaseService(
+                client: CoreDataClient(enableTestMode: true)
+            )
+        )
     }
 
     private func mockCharacterList() -> [Character] {

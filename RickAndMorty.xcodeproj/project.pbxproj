@@ -157,13 +157,6 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		E645DD3E2A8B511400E9D634 /* Database */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Database;
-			sourceTree = "<group>";
-		};
 		E6813E032A7D508E00827346 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,7 +189,6 @@
 				E6B673EE2A84357A00EBBBC8 /* Info.plist */,
 				E6B363692A76197E00143B4B /* Clients */,
 				E6D5AF3B2A8D280600E2A83F /* Database */,
-				E645DD3E2A8B511400E9D634 /* Database */,
 				E6B673E92A8434F900EBBBC8 /* Fonts */,
 				E6D5B6662A7A205C00FCE31B /* Helpers */,
 				E6B363742A77569F00143B4B /* Mocks */,

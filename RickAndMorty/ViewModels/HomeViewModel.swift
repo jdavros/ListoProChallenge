@@ -16,7 +16,6 @@ enum LoadingState {
 
 protocol HomeViewModelProtocol {
     func getCharactersList()
-    func downloadCharactersImages(with characters: [Character])
 }
 
 final class HomeViewModel: ObservableObject {
@@ -42,42 +41,24 @@ final class HomeViewModel: ObservableObject {
 extension HomeViewModel: HomeViewModelProtocol {
     public func getCharactersList() {
         networkService.getCharactersList()
-            .sink { [weak self] characters in
-                self?.downloadCharactersImages(with: characters)
+            .flatMap(downloadCharactersImages(with:))
+            .flatMap(\.publisher)
+            .sink { [weak self] character in
+                self?.charactersList.append(character)
+                self?.databaseService.saveCharacterRecords(character)
+                self?.loadingState = .loaded
+                self?.startAnimation = false
             }
             .store(in: &cancellables)
+
     }
 
-    public func downloadCharactersImages(with characters: [Character]) {
-        for character in characters {
-            networkService.downloadCharactersImages(with: character)
-                .sink { [weak self] image in
-                    let retrievedCharacter = character.mapToCharacterWithImage(image)
-                    self?.databaseService.saveCharacterRecords(retrievedCharacter)
-                    self?.charactersList.append(retrievedCharacter)
-                    self?.loadingState = .loaded
-                    self?.startAnimation = false
-                }
-                .store(in: &cancellables)
+    private func downloadCharactersImages(with characters: [Character]) -> AnyPublisher<[CharacterWithImage], Never> {
+        characters.publisher
+            .flatMap(networkService.downloadCharactersImages(with:))
+            .collect()
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
 
-        }
-    }
-}
-
-private extension Character {
-    func mapToCharacterWithImage(_ image: Image) -> CharacterWithImage {
-        return CharacterWithImage(
-            id: self.id,
-            name: self.name,
-            status: self.status,
-            species: self.species,
-            type: self.type ?? "",
-            gender: self.gender,
-            origin: self.origin,
-            location: self.location,
-            image: image,
-            episodesURLs: self.episodes,
-            episodes: []
-        )
     }
 }

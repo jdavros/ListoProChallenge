@@ -11,7 +11,7 @@ import SwiftUI
 
 @testable import RickAndMorty
 
-enum CharacterServiceState {
+enum ServiceState {
     case empty
     case error
     case populated
@@ -19,14 +19,14 @@ enum CharacterServiceState {
 
 final class MockedCharacterService: NetworkServiceProtocol {
 
-    let characterServiceState: CharacterServiceState
+    let serviceState: ServiceState
 
-    init(with characterServiceState: CharacterServiceState) {
-        self.characterServiceState = characterServiceState
+    init(with serviceState: ServiceState) {
+        self.serviceState = serviceState
     }
 
     func getCharactersList() -> AnyPublisher<[RickAndMorty.Character], Never> {
-        switch characterServiceState {
+        switch serviceState {
         case .populated:
             return getMockedCharacters()
         default:
@@ -34,12 +34,17 @@ final class MockedCharacterService: NetworkServiceProtocol {
         }
     }
 
-    func downloadCharactersImages(with character: RickAndMorty.Character) -> AnyPublisher<Image, Never> {
-        return Just(Image("circle.person")).eraseToAnyPublisher()
+    func downloadCharactersImages(with character: Character) -> AnyPublisher<CharacterWithImage, Never> {
+        return Just(
+            character.mapToCharacterWithImage(
+                Image("circle.person")
+            )
+        )
+        .eraseToAnyPublisher()
     }
 
-    func getModelList(with urls: [String]) -> AnyPublisher<[Episode], Error> {
-        switch characterServiceState {
+    func getEpisodesList(with urls: [String]) -> AnyPublisher<[Episode], Error> {
+        switch serviceState {
         case .empty:
             return Just([])
                 .setFailureType(to: Error.self)
@@ -107,15 +112,25 @@ private extension MockedCharacterService {
 
     func getMockedEpisodesList() -> AnyPublisher<[Episode], Error> {
         return Just([
-            Episode(id: "S01E01", name: "Pilot"),
-            Episode(id: "S01E02", name: "Lawnmower Dog"),
-            Episode(id: "S01E03", name: "Anatomy Park"),
-            Episode(id: "S01E04", name: "M. Night Shaym-Aliens!"),
-            Episode(id: "S01E05", name: "Meeseeks and Destroy")
+            Episode(id: "S01E01", name: "Pilot", characters: populateWithMockedCharacters()),
+            Episode(id: "S01E02", name: "Lawnmower Dog", characters: populateWithMockedCharacters()),
+            Episode(id: "S01E03", name: "Anatomy Park", characters: populateWithMockedCharacters()),
+            Episode(id: "S01E04", name: "M. Night Shaym-Aliens!", characters: populateWithMockedCharacters()),
+            Episode(id: "S01E05", name: "Meeseeks and Destroy", characters: populateWithMockedCharacters())
         ])
         .setFailureType(to: Error.self)
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
+    }
+
+    private func populateWithMockedCharacters() -> [String] {
+        return [
+            "https://rickandmortyapi.com/api/character/1",
+            "https://rickandmortyapi.com/api/character/2",
+            "https://rickandmortyapi.com/api/character/3",
+            "https://rickandmortyapi.com/api/character/4",
+            "https://rickandmortyapi.com/api/character/5"
+        ]
     }
 }
 

@@ -43,24 +43,18 @@ final class DetailViewModelTests: XCTestCase {
         var cancellables = Set<AnyCancellable>()
         let expectedEpisodesList: [Episode] = .getMockedEpisodesList()
         // Assert
-        let exp = [
-            expectation(description: "Wait for the first episode to load"),
-            expectation(description: "Wait for the second episode to load"),
-            expectation(description: "Wait for the third episode to load"),
-            expectation(description: "Wait for the fourth episode to load"),
-            expectation(description: "Wait for the fifth episode to load")
-        ]
+        let exp = expectation(description: "Wait for the first episode to load")
         sut.$episodesDetails.sink { episodes in
             for (index, episode) in episodes.enumerated() {
                 XCTAssertEqual(episode.id, expectedEpisodesList[index].id)
                 XCTAssertEqual(episode.name, expectedEpisodesList[index].name)
-                exp[index].fulfill()
             }
+            exp.fulfill()
         }
         .store(in: &cancellables)
         // Act
         sut.getEpisodesDetail()
-        wait(for: exp, timeout: 1.0)
+        wait(for: [exp], timeout: 1.0)
         XCTAssertTrue(sut.isDetailListAvailable)
     }
 
@@ -81,11 +75,16 @@ final class DetailViewModelTests: XCTestCase {
         XCTAssertFalse(sut.isDetailListAvailable)
     }
 
+    // MARK: - Helper Functions
     private func makeSUT(
         episodesURLs: [String] = [],
-        state: CharacterServiceState
+        state: ServiceState
     ) -> DetailViewModel {
-        let mockedCharacterService = MockedCharacterService(with: state)
-        return DetailViewModel(episodeURLs: episodesURLs, service: mockedCharacterService)
+        let mockedCharacter = MockedInformation.charactersWithImage.first!
+        return DetailViewModel(
+            character: mockedCharacter,
+            networkService: MockedCharacterService(with: state),
+            databaseService: DatabaseService(client: CoreDataClient(enableTestMode: true))
+        )
     }
 }

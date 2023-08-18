@@ -13,7 +13,7 @@ import SwiftUI
 protocol NetworkServiceProtocol {
     func getCharactersList() -> AnyPublisher<[Character], Never>
     func getEpisodesList(with urls: [String]) -> AnyPublisher<[Episode], Error>
-    func downloadCharactersImages(with character: Character) -> AnyPublisher<Image, Never>
+    func downloadCharactersImages(with character: Character) -> AnyPublisher<CharacterWithImage, Never>
 }
 
 final class NetworkService: NetworkServiceProtocol {
@@ -49,16 +49,35 @@ final class NetworkService: NetworkServiceProtocol {
             .eraseToAnyPublisher()
     }
 
-    public func downloadCharactersImages(with character: Character) -> AnyPublisher<Image, Never> {
+    public func downloadCharactersImages(with character: Character) -> AnyPublisher<CharacterWithImage, Never> {
         guard let url = URL(string: character.imageURL) else {
             Logger.networking.error("Converting path into an URL failed.")
-            return Just(.characterPlaceholder)
+            return Just(character.mapToCharacterWithImage(.characterPlaceholder))
                 .eraseToAnyPublisher()
         }
 
         return client.downloadImage(url: url)
             .replaceError(with: .characterPlaceholder)
+            .map(character.mapToCharacterWithImage(_:))
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
+    }
+}
+
+extension Character {
+    func mapToCharacterWithImage(_ image: Image) -> CharacterWithImage {
+        return CharacterWithImage(
+            id: self.id,
+            name: self.name,
+            status: self.status,
+            species: self.species,
+            type: self.type ?? "",
+            gender: self.gender,
+            origin: self.origin,
+            location: self.location,
+            image: image,
+            episodesURLs: self.episodes,
+            episodes: []
+        )
     }
 }
