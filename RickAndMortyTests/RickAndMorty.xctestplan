@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "D0960A54-29C9-470F-B6CF-0985D9921342",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:RickAndMorty.xcodeproj",
+        "identifier" : "E6B363402A76124300143B4B",
+        "name" : "RickAndMortyTests"
+      }
+    }
+  ],
+  "version" : 1
+}
